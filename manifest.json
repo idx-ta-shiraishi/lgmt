@@ -1,0 +1,36 @@
+{
+  "name": "LGMT Image Create",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "LGMT gifアニメを作成する的なSomething",
+  "icons": {
+    "16": "img/icon_16.png",
+    "128": "img/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon_16.png",
+      "128": "img/icon_128.png"
+    },
+    "default_title": "Link Checker",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+          "js/jquery.min.js",
+          "js/script.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "https://*/*",
+    "http://*/*",
+    "storage"
+  ]
+}
