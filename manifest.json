@@ -1,8 +1,8 @@
 {
-  "name": "LGMT Image Create",
+  "name": "LGTM Image Create",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "LGMT gifアニメを作成する的なSomething",
+  "description": "LGTM gifアニメを作成する的なSomething",
   "icons": {
     "16": "img/icon_16.png",
     "128": "img/icon_128.png"
