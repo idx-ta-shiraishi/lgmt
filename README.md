@@ -1,5 +1,8 @@
 # lgtm
 
+##なにこれ
+gifアニ画像にLGTMの文字を乗っけるGoogle Chrome拡張機能
+
 ##インストール方法
 lgtm画像を作成するgoogle拡張機能
 
