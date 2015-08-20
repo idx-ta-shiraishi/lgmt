@@ -1,45 +1,33 @@
 (function($){
 
-    var $imgUrl     = $('#imgUrl'),
-        $copyBtn    = $('#copy'),
-        // url         = 'hoge',
-        alertNull   = 'ファイルURLが空です',
-        alertNotImg = '画像URLではありません',
-        alertCopy   = 'コピーしました';
-
-    // chrome.browserAction.onClicked.addListener(function() {
-    //     alert('Hello, World!');
-    // });
-
-    // chrome.browserAction.onClicked.addListener(function(tab) {
-    // // chrome.tabs.getSelected(null, function(tab) {
-    //     console.log('hoge');
-    //     url = tab.url;
-    // });
-
-    // $imgUrl.val(url);
-
+    var $imgUrl  = $('#imgUrl'),
+        $copyBtn = $('#copy'),
+        $alertArea = $('#alertArea');
 
     $copyBtn.on('click', function(){
         imgChecker($imgUrl.val());
     });
 
-    imgChecker = function(fileName){
+    var imgChecker = function(fileName){
         if (!fileName) {
-            alert(alertNull);
+            alertCreate(3);
         } else {
             var reg      = /(.*)(?:\.([^.]+$))/,
-                fileType = fileName.match(reg)[2];
+                fileType = fileName.match(reg);
 
-            if(fileType.match(/jpg|gif|png/)) {
-                copyToClipBoard(fileName);
+            if(fileType){
+                if(fileType[2].match(/jpg|gif|png/)) {
+                    copyToClipBoard(fileName);
+                } else {
+                    alertCreate(2);
+                }
             } else {
-                alert(alertNotImg);
+                alertCreate(2);
             }
         }
     }
 
-    copyToClipBoard = function(fileName){
+    var copyToClipBoard = function(fileName){
         var copyDiv = document.createElement('div');
         copyDiv.contentEditable = true;
         document.body.appendChild(copyDiv);
@@ -52,6 +40,41 @@
         document.execCommand("Copy", false, null);
         document.body.removeChild(copyDiv);
 
-        alert(alertCopy);
+        alertCreate(0) ;
     }
+
+    var alertCreate = function(alert_type){
+        var alerts = [
+            {'type' : 'success', 'title' : 'success', 'message' : 'クリップボードへコピーしました'},
+            {'type' : 'info',    'title' : 'info',    'message' : 'Info alert'},
+            {'type' : 'warning', 'title' : 'warning', 'message' : '画像URLではありません'},
+            {'type' : 'danger',  'title' : 'error',   'message' : 'ファイルURLが空です'}
+        ];
+
+        var thisAlert = alerts[alert_type];
+
+        var alert = document.createElement('div');
+        alert.setAttribute('class', 'alert alert-' + thisAlert.type + ' alert-dismissable fade in');
+
+        var button = document.createElement('button');
+        button.setAttribute('type', 'button');
+        button.setAttribute('class', 'close');
+        button.setAttribute('data-dismiss', 'alert');
+        button.setAttribute('aria-hidden', 'true');
+        button.setAttribute('aria-label', 'Close');
+        button.appendChild(document.createTextNode('x'));
+
+        var title = document.createElement('h4');
+        title.appendChild(document.createTextNode(thisAlert.title));
+
+        var message = document.createElement('p');
+        message.appendChild(document.createTextNode(thisAlert.message));
+
+        alert.appendChild(button);
+        alert.appendChild(title);
+        alert.appendChild(message);
+
+        $alertArea.append(alert);
+    }
+
 })(jQuery);

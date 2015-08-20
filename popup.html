@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <title></title>
 </head>
 <body>
-    <input type="text" name="" id="imgUrl">
-    <button id="copy">copy!</button>
+    <h3 class="h3">LGTM Generator</h3>
+    <input type="text" name="" id="imgUrl" class="form-control" placeholder="画像URL">
+    <!-- <button id="copy">copy!</button> -->
+    <button type="button" id="copy" class="btn btn-primary center-block">copy!</button>
+
+    <div id="alertArea"></div>
+
     <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
